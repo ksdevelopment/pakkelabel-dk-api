@@ -57,12 +57,12 @@ class Pakkelabels {
         $result = $this->_make_api_call('shipments/zpl', false, array('id' => $id));
         return $result['base64'];
     }
-    
+
     public function shipments($params = array()){
         $result = $this->_make_api_call('shipments/shipments', false, $params);
         return $result;
     }
-    
+
     public function imported_shipments($params = array()){
         $result = $this->_make_api_call('shipments/imported_shipments', false, $params);
         return $result;
@@ -72,7 +72,7 @@ class Pakkelabels {
         $result = $this->_make_api_call('shipments/imported_shipment', true, $params);
         return $result;
     }
-    
+
     public function create_shipment($params){
         $result = $this->_make_api_call('shipments/shipment', true, $params);
         return $result;
@@ -106,12 +106,12 @@ class Pakkelabels {
     public function getToken(){
         return $this->_token;
     }
-    
+
     private function _make_api_call($method, $doPost = false,$params = array()){
         $ch = curl_init();
         $params['token'] = $this->_token;
 
-        $query = http_build_query($params);    
+        $query = http_build_query($params);
         if ($doPost){
             curl_setopt($ch, CURLOPT_URL, self::API_ENDPOINT . '/' . $method);
             curl_setopt($ch, CURLOPT_POST, 1);
@@ -127,13 +127,9 @@ class Pakkelabels {
 
         $output = json_decode($output, true);
         if ($http_code != 200){
-                        if(is_array($output['message'])){
-                                print_r($output['message']);
-                                die();
-                        }else{
-                                die($output['message']);
-                        }
-                }
+            $error_message = is_array($output['message']) ? print_r($output['message'], true) : $output['message'];
+            throw new Exception($error_message);
+        }
         return $output;
     }
 }
