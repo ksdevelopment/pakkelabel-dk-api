@@ -2,7 +2,7 @@ Usage:
 ----------------
 The first thing required is to login
 
-    $label = new Pakkelabels('api_user', 'api_key'); 
+     $label = new Pakkelabels('api_user', 'api_key'); 
 
 This will login and fetch the required token. 
 The token is then automatically added to any subsequent calls. 
