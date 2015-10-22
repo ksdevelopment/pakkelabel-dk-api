@@ -1,0 +1,7 @@
+{
+    "name": "ksdev/pakkelabel-dk-api",
+    "description": "Pakkelabel.dk API class",
+    "autoload": {
+        "files": ["src/php-class-v2.php"]
+    }
+}
